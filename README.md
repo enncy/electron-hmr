@@ -1,8 +1,30 @@
 # electron-hmr
 > an electron hot module replace plugin
 
+# Quickly Start
 
-# Quicly Start
+```shell
+npm i elecrton-hmr -D
+```
+and run hmr , use `--help` to see the options
+```
+ehmr
+```
+if you want to use whit `vite` or other , install `concurrently`
+```shell
+npm i concurrently -D
+```
+`package.json`
+
+```json
+...
+  "scripts": {
+    "dev": "concurrently  \"ehmr\"  \"vite\"  ",
+    ...
+  },
+...
+```
+# JavaScript Api
 
 ```js
 // you also can use import like : import { ElectronHmr } from "electron-hmr"
@@ -40,34 +62,4 @@ watch('.').on('change', (path, stats) => {
         electronHmr.rebuild()
     }
 });
-```
-
-# Use in vite 
-
-```js
-import { VitePluginElectronHmr } from "electron-hmr"
-const electron = require("electron")
-   
-export default defineConfig({
-    //...
-    plugins: [
-         //...
-        VitePluginElectronHmr({
-            electronBinaryPath: electron.toString(),
-            //...
-        })
-
-    ],
-    //...
-})
-```
-
-if you want to watch some files, not the all files : 
-
-```js
-VitePluginElectronHmr({
-    electronBinaryPath: electron.toString(),
-    include:['./src'],
-    exclude:['./node_modules/']
-})
 ```

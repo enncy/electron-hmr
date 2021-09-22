@@ -1,5 +1,7 @@
-import { ElectronHmrUpdateOptions, ElectronHrmBuildOptions } from "../interface";
+import { ElectronHmr } from "../core";
+import { ElectronHmrWatchOptions } from "../interface";
 export declare const ViteElectronHmrName = "vite-plugin-electron-hmr";
+export declare let ElectronRebuildTimes: number;
 /**
  * a electron hmr plugin for vite
  *
@@ -26,10 +28,11 @@ export declare const ViteElectronHmrName = "vite-plugin-electron-hmr";
  *
  *
  */
-export declare function VitePluginElectronHmr({ electronBinaryPath, args, include, exclude }: ElectronHrmBuildOptions & ElectronHmrUpdateOptions): {
+export declare function VitePluginElectronHmr(electronHmr: ElectronHmr, { include, exclude }: ElectronHmrWatchOptions): {
     name: string;
-    handleHotUpdate({ file }: {
+    handleHotUpdate({ file, timestamp, read }: {
         file: string;
-    }): void;
-    configResolved(): void;
+        timestamp: number;
+        read: () => string | Promise<string>;
+    }): Promise<void>;
 };

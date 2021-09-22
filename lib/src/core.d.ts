@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { ElectronHmrUpdateOptions, ElectronHrmBuildOptions } from './interface';
+import { ElectronHmrWatchOptions, ElectronHrmBuildOptions } from './interface';
 import { ChildProcess } from "child_process";
 /**
  * the core of electron-hmr
@@ -12,15 +12,11 @@ export declare class ElectronHmr {
      * use chokidar to watch files and rebuild electron
      * @param options {@link ElectronHmrWatchOptions}
      */
-    watch(options?: ElectronHmrUpdateOptions): void;
-    /**
-     * rebuild the electron
-     */
-    update(path: string, options?: ElectronHmrUpdateOptions): void;
+    watch(options?: ElectronHmrWatchOptions): void;
     /**
      * rebuild the electron
      * @param options {@link ElectronHrmBuildOptions} default
      */
     rebuild(): void;
-    private build;
+    build(): void;
 }

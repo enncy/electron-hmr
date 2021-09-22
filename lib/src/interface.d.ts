@@ -1,3 +1,5 @@
+/// <reference types="node" />
+import { SpawnOptionsWithoutStdio } from "child_process";
 /**
  * electron hmr options
  */
@@ -13,22 +15,26 @@ export interface ElectronHrmBuildOptions {
      */
     args?: string[];
     /**
+     * @see {@link SpawnOptionsWithoutStdio}
+     */
+    options?: SpawnOptionsWithoutStdio | undefined;
+    /**
      * @see {@link ElectronConsoleOptions}
      */
     consoleOptions?: ElectronConsoleOptions;
 }
 /**
- * update options
+ * watch options
  */
-export interface ElectronHmrUpdateOptions {
+export interface ElectronHmrWatchOptions {
     /**
-     * some paths that need to be listened to for changes
+     *  pass in chokidar first argument
      */
-    include?: RegExp[] | string[] | RegExp | string;
+    include?: readonly string[] | string;
     /**
-     * some paths that do not need to be listened to for changes
+     *  pass in chokidar second argument ignore param
      */
-    exclude?: RegExp[] | string[] | RegExp | string;
+    exclude?: readonly string[] | string;
 }
 /**
  * show the electron main process console

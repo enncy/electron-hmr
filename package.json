@@ -4,6 +4,9 @@
   "description": "an electron hot module replace plugin of vite",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "bin": {
+    "ehmr": "./lib/ehmr.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,9 +29,13 @@
   "homepage": "https://github.com/enncy/electron-hmr#readme",
   "dependencies": {
     "chalk": "^4.1.2",
-    "chokidar": "^3.5.2"
+    "chokidar": "^3.5.2",
+    "commander": "^8.2.0",
+    "micromatch": "^4.0.4"
   },
   "devDependencies": {
-    "@types/node": "^16.9.4"
+    "@types/micromatch": "^4.0.2",
+    "@types/node": "^16.9.4",
+    "electron": "^15.0.0"
   }
 }

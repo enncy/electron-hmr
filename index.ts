@@ -1,5 +1,7 @@
 
 import { ElectronHmr } from './src/core';
-import { VitePluginElectronHmr } from './src/plugins/vite.plugin';
+export * from './src/utils'
+export { ElectronHmr }
 
-export { ElectronHmr, VitePluginElectronHmr }
+
+
