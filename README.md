@@ -1,7 +1,8 @@
 # electron-hmr
-> an electron hot module replace plugin of vite
+> an electron hot module replace plugin
 
-## Quicly Start
+
+# Quicly Start
 
 ```js
 // you also can use import like : import { ElectronHmr } from "electron-hmr"
@@ -15,21 +16,33 @@ const electronHmr = new ElectronHmr({
     // other options
 })
 
-// start hmr
+// rebuild after 3000s delay
+settimeout(electronHmr.rebuild,3000)
+```
+##  Three way to rebuild electron 
+
+**1. you can use `rebuild()` to rebuild the electron**
+
+```js
+electronHmr.rebuild()
+```
+ **2. start hot module replace, it will watch file change and rebuild automaticly**
+```js
 electronHmr.watch(/*options*/)
+```
+**3. or you can use chokidar to watch file and rebuild manually** 
 
-
-// or you can use chokidar to watch file
+```js
 import { watch } from 'chokidar';
 watch('.').on('change', (path, stats) => {
     if (stats?.isFile /* or some condition*/) {
         // rebuild the electron
-        electronHmr.rebuild(path)
+        electronHmr.rebuild()
     }
 });
 ```
 
-## Use in vite 
+# Use in vite 
 
 ```js
 import { VitePluginElectronHmr } from "electron-hmr"
@@ -40,7 +53,7 @@ export default defineConfig({
     plugins: [
          //...
         VitePluginElectronHmr({
-            electronBinaryPath: electrontoString(),
+            electronBinaryPath: electron.toString(),
             //...
         })
 
@@ -49,43 +62,12 @@ export default defineConfig({
 })
 ```
 
-## API
+if you want to watch some files, not the all files : 
 
-### `class` ElectronHmr
-
-#### options
-
-   - `electronBinaryPath`:`string`  , the binary path of electron , like `node_modules/electron/dist/electron.exe`
-
-   - `args`:`string[]` default :  `['.']` , the electron launch arguments
-
-   - `consoleOptions`: the electron child process stdout and stderr console option
-
-​       - `useChalk`:`boolean` default : true , use the chalk to print
-
-​       - `preffix`:`string` default : 'electron-hmr'
-
-#### methods
-> more the detail , please see the source code
-- watch : watch file change
-- update : update electron
-- rebuild : rebuild electron
-- build : build electron
-### `function` VitePluginElectronHmr
-
-   - `electronBinaryPath`:`string`  , the binary path of electron , like `node_modules/electron/dist/electron.exe`
-
-   - `args`:`string[]` default :  `['.']` , the electron launch arguments
-
-   - `consoleOptions`: the electron child process stdout and stderr console option
-
-​       - `useChalk`:`boolean` default : true , use the chalk to print
-
-​       - `preffix`:`string` default : 'electron-hmr'
-
-   - `exclude`:`(string|Regexp)[] | string | Regexp` default :  undefined , if you use `['.']` , it will do nothing when file change
-
-   - `include`:`(string|Regexp)[] | string | Regexp` default :  `['.']` , include all the file
-
-   
-
+```js
+VitePluginElectronHmr({
+    electronBinaryPath: electron.toString(),
+    include:['./src'],
+    exclude:['./node_modules/']
+})
+```

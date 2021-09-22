@@ -21,6 +21,6 @@ export declare class ElectronHmr {
      * rebuild the electron
      * @param options {@link ElectronHrmBuildOptions} default
      */
-    rebuild(options?: ElectronHrmBuildOptions): void;
-    build(options?: ElectronHrmBuildOptions): void;
+    rebuild(): void;
+    private build;
 }

@@ -63,15 +63,15 @@ export class ElectronHmr {
      * rebuild the electron 
      * @param options {@link ElectronHrmBuildOptions} default 
      */
-    rebuild(options?: ElectronHrmBuildOptions) {
+    rebuild() {
         if (this.electronProcess) {
             this.electronProcess.kill()
         }
-        this.build(options)
+        this.build()
     }
 
-    build(options?: ElectronHrmBuildOptions) {
-        const { electronBinaryPath, args = ["."] } = options || this.options
+    private build() {
+        const { electronBinaryPath, args = ["."] } =   this.options
         this.electronProcess = child_process.spawn(electronBinaryPath, args)
     }
 }
