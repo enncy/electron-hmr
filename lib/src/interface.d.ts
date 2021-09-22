@@ -1,6 +1,3 @@
-/// <reference types="node" />
-import { WatchOptions } from "chokidar";
-import { Stats } from "fs";
 /**
  * electron hmr options
  */
@@ -19,23 +16,6 @@ export interface ElectronHrmBuildOptions {
      * @see {@link ElectronConsoleOptions}
      */
     consoleOptions?: ElectronConsoleOptions;
-}
-/**
- * watch options
- */
-export interface ElectronHmrWatchOptions {
-    /**
-     * the hmr watch paths
-     */
-    paths?: string | readonly string[];
-    /**
-     * chokidar watch options
-     */
-    watchOptions?: WatchOptions;
-    /**
-     * callback when file change
-     */
-    change: (path: string, stats: Stats | undefined) => void;
 }
 /**
  * update options

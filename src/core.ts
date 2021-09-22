@@ -1,6 +1,6 @@
 
 import { watch } from 'chokidar';
-import { ElectronHmrUpdateOptions, ElectronHmrWatchOptions, ElectronHrmBuildOptions } from './interface';
+import { ElectronHmrUpdateOptions,  ElectronHrmBuildOptions } from './interface';
 import child_process, { ChildProcess } from "child_process";
 import { ElectronHmrConsole } from './console';
 
@@ -21,12 +21,12 @@ export class ElectronHmr {
      * use chokidar to watch files and rebuild electron
      * @param options {@link ElectronHmrWatchOptions}
      */
-    watch(options?: ElectronHmrWatchOptions) {
-        watch(options?.paths || '.', options?.watchOptions).on('change', (path, stats) => {
+    watch(options?: ElectronHmrUpdateOptions) {
+
+        watch('.').on('change', (path, stats) => {
             if (stats?.isFile) {
-                this.update(path)
+                this.update(path,  options)
             }
-            options?.change(path, stats)
         });
 
     }

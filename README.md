@@ -16,12 +16,17 @@ const electronHmr = new ElectronHmr({
 })
 
 // start hmr
-electronHmr.watch({
-    paths: '.',
-    change(path, stats) {
-        console.log('file is change : ', path);
+electronHmr.watch(/*options*/)
+
+
+// or you can use chokidar to watch file
+import { watch } from 'chokidar';
+watch('.').on('change', (path, stats) => {
+    if (stats?.isFile /* or some condition*/) {
+        // rebuild the electron
+        electronHmr.rebuild(path)
     }
-})
+});
 ```
 
 ## Use in vite 
@@ -78,11 +83,9 @@ export default defineConfig({
 
 ​       - `preffix`:`string` default : 'electron-hmr'
 
-   - `hmrUpdateOptions`: file update options
+   - `exclude`:`(string|Regexp)[] | string | Regexp` default :  undefined , if you use `['.']` , it will do nothing when file change
 
-​       - `exclude`:`(string|Regexp)[] | string | Regexp` default :  undefined , if you use `['.']` , it will do nothing when file change
-
-​       - `include`:`(string|Regexp)[] | string | Regexp` default :  `['.']` , include all the file
+   - `include`:`(string|Regexp)[] | string | Regexp` default :  `['.']` , include all the file
 
    
 

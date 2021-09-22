@@ -26,9 +26,7 @@ export declare const ViteElectronHmrName = "vite-plugin-electron-hmr";
  *
  *
  */
-export declare function VitePluginElectronHmr({ electronBinaryPath, args, hmrUpdateOptions }: ElectronHrmBuildOptions & {
-    hmrUpdateOptions?: ElectronHmrUpdateOptions;
-}): {
+export declare function VitePluginElectronHmr({ electronBinaryPath, args, include, exclude }: ElectronHrmBuildOptions & ElectronHmrUpdateOptions): {
     name: string;
     handleHotUpdate({ file }: {
         file: string;

@@ -1,7 +1,6 @@
-import chalk from "chalk";
 import { log } from "../console";
 import { ElectronHmr } from "../core";
-import { ElectronHmrUpdateOptions, ElectronHmrWatchOptions, ElectronHrmBuildOptions } from "../interface";
+import { ElectronHmrUpdateOptions, ElectronHrmBuildOptions } from "../interface";
 
 export const ViteElectronHmrName = "vite-plugin-electron-hmr"
 
@@ -32,7 +31,7 @@ export const ViteElectronHmrName = "vite-plugin-electron-hmr"
  * 
  * 
  */
-export function VitePluginElectronHmr({ electronBinaryPath, args, hmrUpdateOptions }: ElectronHrmBuildOptions & { hmrUpdateOptions?: ElectronHmrUpdateOptions }) {
+export function VitePluginElectronHmr({ electronBinaryPath, args, include, exclude }: ElectronHrmBuildOptions & ElectronHmrUpdateOptions) {
 
     const electronHmr = new ElectronHmr({
         electronBinaryPath, args,
@@ -44,7 +43,7 @@ export function VitePluginElectronHmr({ electronBinaryPath, args, hmrUpdateOptio
     return {
         name: ViteElectronHmrName,
         handleHotUpdate({ file }: { file: string }) {
-            electronHmr.update(file, hmrUpdateOptions)
+            electronHmr.update(file, { include, exclude })
             log(` rebuilding : file change - ${file}`, { preffix: ViteElectronHmrName })
         },
 
