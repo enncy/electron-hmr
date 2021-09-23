@@ -1,6 +1,8 @@
 # electron-hmr
 > an electron hot module replace plugin
 
+![https://cdn.jsdelivr.net/gh/enncy/electron-hmr@1.1.1/docs/show.gif](https://cdn.jsdelivr.net/gh/enncy/electron-hmr@1.1.1/docs/show.gif)
+
 # Quickly Start
 
 ```shell

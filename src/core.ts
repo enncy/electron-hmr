@@ -3,7 +3,7 @@ import { watch } from 'chokidar';
 import { ElectronHmrWatchOptions, ElectronHrmBuildOptions } from './interface';
 import child_process, { ChildProcess } from "child_process";
 import { ElectronHmrConsole } from './console';
- 
+
 
 /**
  * the core of electron-hmr
@@ -28,7 +28,7 @@ export class ElectronHmr {
         fsWatcher.on('change', (path, stats) => {
             if (stats?.isFile) {
                 this.rebuild()
-                if (console && this.electronProcess) {
+                if (this.electronProcess) {
                     ElectronHmrConsole(this.electronProcess, this.options.consoleOptions || {})
                 }
             }
