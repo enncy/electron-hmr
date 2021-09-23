@@ -28,9 +28,6 @@ export class ElectronHmr {
         fsWatcher.on('change', (path, stats) => {
             if (stats?.isFile) {
                 this.rebuild()
-                if (this.electronProcess) {
-                    ElectronHmrConsole(this.electronProcess, this.options.consoleOptions || {})
-                }
             }
         });
 
@@ -50,6 +47,9 @@ export class ElectronHmr {
     build() {
         const { electronBinaryPath, args = ["."], options } = this.options
         this.electronProcess = child_process.spawn(electronBinaryPath, args, options)
+        if (this.electronProcess) {
+            ElectronHmrConsole(this.electronProcess, this.options.consoleOptions || {})
+        }
     }
 
 }
